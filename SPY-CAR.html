@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Gear</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* INDEX */
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Espace plata */
+        .ads-space {
+            height: 100px;
+            background-color: #ccc;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        /* Cadre (chiant dnt touch) */
+        .game-wrapper {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Masque tout ce qui dépasse */
+            background: #000;
+        }
+
+        /* Conteneur (chiant pas touché comme ifram) */
+        .game-frame-container {
+            width: 75%; /* Dimensions visibles */
+            height: 100%; /* comme source */
+            overflow: hidden; /* Cache tout ce qui dépasse */
+            position: relative;
+        }
+
+        iframe {
+            position: absolute;
+            width: 100%; /* Taille réelle src */
+            height: 100%; /* Taille réelle src */
+            top: 0;
+            left: 0;
+        }
+
+        /* Boutons haut */
+        .top-buttons {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        /* CCS button */
+        .button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .button:active {
+            background-color: #1e6fa7;
+    </style>
+</head>
+<body>
+    <!-- INDEX -->
+    <div class="container">
+
+        <!-- réservé publicités tah la plata -->
+        <div class="ads-space">
+            Publicité
+        </div>
+
+        <!-- Section jeu -->
+        <div class="game-wrapper" id="gameWrapper">
+            <!-- haut -->
+            <div class="top-buttons">
+                <!-- Retour -->
+                <button class="button" onclick="goBack()">Retour</button>
+                <!-- Plein écran -->
+                <button class="button" id="fullscreenButton" onclick="toggleFullscreen()">Plein écran</button>
+            </div>
+
+            <!-- Conteneur masqué avec iframe recadré -->
+            <div class="game-frame-container">
+                <iframe src="https://html5.gamedistribution.com/21672945a43f40eab0e69b515feba030/?u" frameborder="0" scrolling="no" width="700" height="560" allowfullscreen></iframe>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gameWrapper = document.getElementById('gameWrapper');
+        const fullscreenButton = document.getElementById('fullscreenButton');
+        let isFullscreen = false;
+
+        // c pour retourné
+        function goBack() {
+            window.history.back();
+        }
+
+        // désac plein écran
+        function toggleFullscreen() {
+            const gameFrameContainer = document.querySelector('.game-frame-container');
+            if (!isFullscreen) {
+                gameWrapper.classList.add('fullscreen-active');
+                fullscreenButton.textContent = "Quitter le plein écran";
+                isFullscreen = true;
+            } else {
+                gameWrapper.classList.remove('fullscreen-active');
+                fullscreenButton.textContent = "Plein écran";
+                isFullscreen = false;
+            }
+        }
+    </script>
+</body>
+</html>
